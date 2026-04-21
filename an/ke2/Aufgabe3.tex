@@ -1,0 +1,76 @@
+
+\documentclass[a4paper,12pt]{article}
+
+% --- Use XeLaTeX font support ---
+
+
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes} % nice Times-like font, installed by texlive-core
+\setsansfont{TeX Gyre Heros} % optional sans-serif
+\setmonofont{Fira Code}       % optional monospaced font
+% --- Math packages ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% --- Page layout ---
+\usepackage[margin=1in]{geometry}
+
+% --- Better lists ---
+\usepackage{enumitem}
+% --- Hyperlinks for references ---
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+
+% Header: fancy layout like the rovided image
+\usepackage{fancyhdr}
+\setlength{\headheight}{26pt} % increase if fancyhdr warns
+\pagestyle{fancy}
+\fancyhf{} % clear header/footer
+\rhead{\begin{tabular}{r} Mt.: 3052737\end{tabular}}
+\chead{\begin{tabular}{c}Lösungen EA 2\end{tabular}}
+\lhead{\begin{tabular}{l}61211 Analysis SS26 \end{tabular}}
+\renewcommand{\headrulewidth}{0.8pt}
+\fancyfoot[C]{- \thepage\ -}
+% Ensure the plain page style (used by \maketitle) uses the same header
+
+% --- Line spacing ---
+\usepackage{setspace} % provides \doublespacing and \onehalfspacing
+
+% --- Optional solutions environment ---
+\newenvironment{solution}{
+  \par\noindent\textbf{Solution:}\quad
+}{\hfill$\blacksquare$\par\vspace{1em}}
+
+% % --- Title info ---
+% \title{Aufgabe \#1}
+% \author{Your Name}
+% \date{\today}
+% 
+\begin{document}
+\raggedright
+% Enable double (2.0) line spacing for the document body
+\doublespacing
+
+
+\noindent\textbf{Aufgabe 3} \\
+\noindent\textbf{(a)} 
+Einsetzen von $g(x) = \sin x$ in $f(x)$:$$(f \circ g)(x) = f(\sin x) = \begin{cases} -1, & \text{falls } \sin x < 0 \\ 1, & \text{falls } \sin x \ge 0 \end{cases}$$
+Die Funktion hat an den Punkten $sin(x)=0$ Unstetigkeitspunkte, also wenn $x=k\pi$ ist. Exemplarisch lässt sich das für die Stelle $k=0$ mit dem Folgenkriterium zeigen. \\
+Annäherung von rechts mit der Folge $x_n = 1/n$, dann ist $\sin(x_n)>0$ und damit $f(\sin(x_n)) = 1$. Der rechseitige Grenzwert ist 1. \\
+Bei Annäherung von links mit $x_n = - 1/n$ ist der Grenzwert $-1$ wegen $\sin(x_n)<0$. \\
+Da der linkseitige und rechseitige Grenzwert nicht übereinstimmen ist die Funktion im Punkt $x=0$ nicht stetig. \\
+Für $x \neq k\pi$ handelt es sich um eine Verknüpfung von stetigen Funktionen. Die Funktion $f \circ g$ ist daher in diesen Punkten stetig.
+
+\bigskip
+\noindent\textbf{(b)} \\
+\begin{itemize}
+    \item Klar ist $f_n(0) =0$ und $f_n(1) = n$.
+Da $f_n(x)$ als Polynomfunktion stetig ist folgt aus dem Zwischenwertsatz, dass es (mindestens) ein $x_n$ mit $f(x_n)=1$ gibt. Da $f_n$ nur aus positiven Potenzen besteht ist die Ableitung positiv für $x>0$, die Funktion daher monoton steigend und das $x_n$ eindeutig. 
+\item Die nächste Funktion in der Reihe ist $f_{n+1}(x)=x+x²+ \cdots + x^{n+1}=f_n(x)+x^{n+1} $. Wegen $f_n(x_n)=1$ folgt $f_{n+1}(x_n) = 1 + x_n^{n+1}$. Wir wissen, dass $x_n > 0$ ist. Daher ist $f_{n+1}(x_n) > 1$. Aufgrund der Monotonie der Funktion muss $x_{n+1} < x_n$ gelten. Damit ist gezeigt, das $(x_n)$ streng monoton ist.
+\item Mit Hilfe der geometrischen Summe lässt sich die Funktion umformulieren zu 
+$$f_n(x_n) = x_n \frac{1-x_n^n}{1-x_n}= 1$$
+Multiplizieren beider Seiten mit $1-x_n$
+$$x_n(1-x_n^n)=1-x_n$$
+
+\end{itemize}
+
+\end{document}
