@@ -1,0 +1,93 @@
+\documentclass[a4paper,12pt]{article}
+
+% --- Use XeLaTeX font support ---
+
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes} % nice Times-like font, installed by texlive-core
+\setsansfont{TeX Gyre Heros} % optional sans-serif
+\setmonofont{Fira Code}       % optional monospaced font
+% --- Math packages ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% --- Page layout ---
+\usepackage[margin=1in]{geometry}
+
+% --- Better lists ---
+\usepackage{enumitem}
+% --- Hyperlinks for references ---
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+
+% Header: fancy layout like the rovided image
+\usepackage{fancyhdr}
+\setlength{\headheight}{26pt} % increase if fancyhdr warns
+\pagestyle{fancy}
+\fancyhf{} % clear header/footer
+\rhead{\begin{tabular}{r} Mt.: 3052737\end{tabular}}
+\chead{\begin{tabular}{c}Lösungen EA 2\end{tabular}}
+\lhead{\begin{tabular}{l}61112 Lineare Algebra SS26 \end{tabular}}
+\renewcommand{\headrulewidth}{0.8pt}
+\fancyfoot[C]{- \thepage\ -}
+% Ensure the plain page style (used by \maketitle) uses the same header
+
+% --- Line spacing ---
+\usepackage{setspace} % provides \doublespacing and \onehalfspacing
+
+% --- Optional solutions environment ---
+\newenvironment{solution}{
+  \par\noindent\textbf{Solution:}\quad
+}{\hfill$\blacksquare$\par\vspace{1em}}
+
+% % --- Title info ---
+% \title{Aufgabe \#1}
+% \author{Your Name}
+% \date{\today}
+% 
+\begin{document}
+\raggedright
+% Enable double (2.0) line spacing for the document body
+\doublespacing
+\noindent\textbf{Aufgabe 2.2} \\
+
+
+\noindent\textbf{(a)} Die Matrix wird durch die Bilder der 
+Basisvektoren bestimmt. 
+Wir setzen die Standardbasisvektoren in $f$ ein:
+$$
+f(e_1) = f\begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} 1 + 0 \\ (1+i)\cdot 1 - 0 \end{pmatrix} = \begin{pmatrix} 1 \\ 1+i \end{pmatrix}
+$$
+$$
+f(e_2) = f\begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 0 + 1 \\ (1+i)\cdot 0 - 1 \end{pmatrix} = \begin{pmatrix} 1 \\ -1 \end{pmatrix}
+$$
+Die Bildvektoren sind direkt die Spalten der Matrix:
+$${}_{\mathcal{E}}M_{\mathcal{E}}(f)=\begin{pmatrix} 1 & 1 \\ 1 + i & -1   \end{pmatrix}.$$
+
+\bigskip
+\noindent\textbf{(b)}
+ Wenn man eine Darstellungsmatrix hat, dann ist $f$ genau ein Isomorphismus, wenn die Matrix invertierbar ist. Man erkennt sofot, dass die Matrix aus (a)  den vollen Rang hat (Rang 2), ist damit invertierbar, und f ist ein Isomorphismus.
+
+
+\bigskip
+\noindent\textbf{(c)} Die Transformationsformel lautet:
+$${}_{\mathcal{B}}M_{\mathcal{B}}(f)={}_{\mathcal{B}}M_{\mathcal{E}}(id){}_{\mathcal{E}}M_{\mathcal{E}}(f){}_{\mathcal{E}}M_{\mathcal{B}}(id)$$
+
+Die Spalten von ${}_{\mathcal{E}}M_{\mathcal{B}}(id)$ sind einfach die Vektoren der Basis \\
+$$ {}_{\mathcal{E}}M_{\mathcal{B}}(id)= \begin{pmatrix} 0 & 1 \\ i & 2i \end{pmatrix}$$
+Durch berechnen der Inverse von ${}_{\mathcal{E}}M_{\mathcal{B}}(id)$ erhalten wir ${}_{\mathcal{B}}M_{\mathcal{E}}(id)$:
+$${}_{\mathcal{B}}M_{\mathcal{E}}(id) = \frac{1}{-i} \begin{pmatrix} 2i & -1 \\ -i & 0 \end{pmatrix} = i \begin{pmatrix} 2i & -1 \\ -i & 0 \end{pmatrix} = \begin{pmatrix} -2 & -i \\ 1 & 0 \end{pmatrix}$$
+Zusammen: \\
+$$M_\mathcal{B}^\mathcal{B}(f) = \begin{pmatrix} -2 & -i \\ 1 & 0 \end{pmatrix} \cdot \begin{pmatrix} 1 & 1 \\ 1+i & -1 \end{pmatrix} \cdot \begin{pmatrix} 0 & 1 \\ i & 2i \end{pmatrix}$$
+Ausmultiplizieren und vereinfachen ergibt:
+$$ M_\mathcal{B}^\mathcal{B}(f)= \begin{pmatrix} -1 - 2i & -3 - 5i \\ i & 1 + 2i \end{pmatrix}$$
+
+
+\bigskip
+\noindent\textbf{(d)} 
+Gesucht sind Linearformen $b_i^*: \mathbb{C}^2 \to \mathbb{C}$, sodass $b_i^*(b_j) = \delta_{ij}$ gilt. Wie in Beispiel (2.4.14) kann man die Dualbasis aus den Zeilen der Inverse der  Matrix 
+$A = \begin{pmatrix} 0 & 1 \\ i & 2i \end{pmatrix}$ ablesen.
+$$A^{-1} = \begin{pmatrix} -2 & -i \\ 1 & 0 \end{pmatrix}$$ 
+
+Die Dualbasisvektoren sind definiert durch:
+$$b_1^*\begin{pmatrix} x \\ y \end{pmatrix} = -2x - iy$$
+$$b_2^*\begin{pmatrix} x \\ y \end{pmatrix} = x$$
+\end{document}
