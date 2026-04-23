@@ -1,0 +1,85 @@
+\documentclass[a4paper,12pt]{article}
+
+% --- Use XeLaTeX font support ---
+
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes} % nice Times-like font, installed by texlive-core
+\setsansfont{TeX Gyre Heros} % optional sans-serif
+\setmonofont{Fira Code}       % optional monospaced font
+% --- Math packages ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% --- Page layout ---
+\usepackage[margin=1in]{geometry}
+
+% --- Better lists ---
+\usepackage{enumitem}
+% --- Hyperlinks for references ---
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+
+% Header: fancy layout like the rovided image
+\usepackage{fancyhdr}
+\setlength{\headheight}{26pt} % increase if fancyhdr warns
+\pagestyle{fancy}
+\fancyhf{} % clear header/footer
+\rhead{\begin{tabular}{r} Mt.: 3052737\end{tabular}}
+\chead{\begin{tabular}{c}Lösungen EA 2\end{tabular}}
+\lhead{\begin{tabular}{l}61112 Lineare Algebra SS26 \end{tabular}}
+\renewcommand{\headrulewidth}{0.8pt}
+\fancyfoot[C]{- \thepage\ -}
+% Ensure the plain page style (used by \maketitle) uses the same header
+
+% --- Line spacing ---
+\usepackage{setspace} % provides \doublespacing and \onehalfspacing
+
+% --- Optional solutions environment ---
+\newenvironment{solution}{
+  \par\noindent\textbf{Solution:}\quad
+}{\hfill$\blacksquare$\par\vspace{1em}}
+
+% % --- Title info ---
+% \title{Aufgabe \#1}
+% \author{Your Name}
+% \date{\today}
+% 
+\begin{document}
+\raggedright
+% Enable double (2.0) line spacing for the document body
+\doublespacing
+\noindent\textbf{Aufgabe 2.3} \\
+
+Es gibt eine Basis zum Unterraum $U$, die sich aufgrund des Basisergänzungsatzes zu einer Basis des Vekroraums $V$ ergänzen lässt:
+$$B = u_1, \ldots , u_t, v_{t+1}, \ldots, v_{n}.$$
+Zum Vektorraum $V$ gibt es einen Dualraum $V^*$. Zur Basis B gibts eine eindeutige Dualbasis $B^*$:
+$$B^* = u_1^*, \ldots , u_t^*, v_{t+1}^*, \ldots, v_{n}^*.$$
+Aufgrund der Eigenschaften der Dualbasis gilt für die "hinteren" Linearformen $v_k^*$ (mit $k \ge t+1$):\\
+\begin{itemize}
+  \item $v_k^*(u_j) = 0$ für alle $j = 1, \ldots, t$ (sie verschwinden auf den Vektoren von $U$)
+  \item $v_k^*(v_l) = 1$ falls $k=l$, und $0$ sonst.
+\end{itemize}
+Sind die gesuchten Linearformen $\alpha_i$ genau die hinteren Vektoren der Dualbasis? \\
+Dazu setzen wir für $i = 1, \ldots, n-t$:
+$$\alpha_i := v_{t+i}^*.$$
+
+Zu zeigen ist:
+$$
+\boxed{U = \bigcap_{i=1}^{n-t} \ker(v_{t+i}^*)}
+$$
+\begin{itemize}
+ \item Richtung: $U \subseteq  \bigcap_{i=1}^{n-t} \ker(v_{t+i}^*)$: \\
+Sei $x$ ein Vektor aus dem Unterraum $U$, $x \in U$. Da $(u_1, \ldots, u_t)$ eine Basis von $U$ ist, lässt sich $x$ als Linearkombination der Basisvektoren schreiben:
+$x = \sum_{j=1}^t \lambda_j u_j$.
+Anwenden der "hinteren" Elemente der Dualbasis auf den Vektor:
+$$v_k^*(x)=v_k^*(\sum_{j=1}^t \lambda_ju_j)=0 \ \ \text{für} \ \  k \geq t+1,$$
+wegen $v_k^*(u_j) = 0$ für alle $j = 1, \ldots, t$ (sie verschwinden auf den Vektoren von $U$). Also liegt $x$ im Kern jeder dieser Linearformen, $x \in \bigcap_{i=1}^{n-t} \ker(v_{t+i}^*)$. \\
+
+ \item Richtung: $ \bigcap_{i=1}^{n-t}\ker(v_{t+i}^*) \subseteq U$: \\
+ Sei $x \in \bigcap_{i=1}^{n-t}\ker(v_{t+i}^*)$, also $v_{t+i}^*(x) = 0  \ \forall \ i$. \\
+ Jedes x lässt sich schreiben als
+ $$x=\sum_{i=1}^t \lambda_iu_i+\sum_{i=t-1}^n\lambda_iv_i$$
+ Da x im Durchschnitt der Kerne liegt, wissen wir, dass $v_j^*(x)=0$ für alle $j=t+1, \ldots n$.
+ Anwenden der $v_i^*$ auf die Basisdarstellung von x:
+ $$v_j^*(x) =v_j^*(\sum_{i=1}^t \lambda_iu_i+\sum_{i=t-1}^n\lambda_iv_i) =0$$
+\end{itemize}
+\end{document}
