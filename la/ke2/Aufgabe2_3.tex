@@ -50,9 +50,9 @@
 \noindent\textbf{Aufgabe 2.3} \\
 
 Es gibt eine Basis zum Unterraum $U$, die sich aufgrund des Basisergänzungsatzes zu einer Basis des Vekroraums $V$ ergänzen lässt:
-$$B = u_1, \ldots , u_t, v_{t+1}, \ldots, v_{n}.$$
+$$B = (u_1, \ldots , u_t, v_{t+1}, \ldots, v_{n}).$$
 Zum Vektorraum $V$ gibt es einen Dualraum $V^*$. Zur Basis B gibts eine eindeutige Dualbasis $B^*$:
-$$B^* = u_1^*, \ldots , u_t^*, v_{t+1}^*, \ldots, v_{n}^*.$$
+$$B^* = (u_1^*, \ldots , u_t^*, v_{t+1}^*, \ldots, v_{n}^*).$$
 Aufgrund der Eigenschaften der Dualbasis gilt für die "hinteren" Linearformen $v_k^*$ (mit $k \ge t+1$):\\
 \begin{itemize}
   \item $v_k^*(u_j) = 0$ für alle $j = 1, \ldots, t$ (sie verschwinden auf den Vektoren von $U$)
@@ -76,10 +76,18 @@ wegen $v_k^*(u_j) = 0$ für alle $j = 1, \ldots, t$ (sie verschwinden auf den Ve
 
  \item Richtung: $ \bigcap_{i=1}^{n-t}\ker(v_{t+i}^*) \subseteq U$: \\
  Sei $x \in \bigcap_{i=1}^{n-t}\ker(v_{t+i}^*)$, also $v_{t+i}^*(x) = 0  \ \forall \ i$. \\
- Jedes x lässt sich schreiben als
- $$x=\sum_{i=1}^t \lambda_iu_i+\sum_{i=t-1}^n\lambda_iv_i$$
- Da x im Durchschnitt der Kerne liegt, wissen wir, dass $v_j^*(x)=0$ für alle $j=t+1, \ldots n$.
+ Jedes $x$ lässt sich schreiben als
+ $$x=\sum_{i=1}^t \lambda_iu_i+\sum_{i=t+1}^n\lambda_iv_i$$
+ Da $x$ im Durchschnitt der Kerne liegt, wissen wir, dass $v_j^*(x)=0$ für alle $j=t+1, \ldots n$.
  Anwenden der $v_i^*$ auf die Basisdarstellung von x:
- $$v_j^*(x) =v_j^*(\sum_{i=1}^t \lambda_iu_i+\sum_{i=t-1}^n\lambda_iv_i) =0$$
+ $$v_j^*(x) =v_j^*(\sum_{i=1}^t \lambda_iu_i+\sum_{i=t+1}^n\lambda_iv_i) =0$$
+ Für die erste Summe sind die Indices immmer verschieden, es gilt also $v_j^*(u_i) = 0$ für alle $i$. Bei der zweiten Summe bleibt entsprechend das $\lambda$ mit $i=j$ stehen, also
+ $$v_j^*(x) = \lambda_j \ \text{für} \ j=t+1, \ldots, n.$$
+ Es folgt zwingend
+ $$\lambda_j = 0 \ \text{für} \ j=t+1, \ldots, n.$$
+Also sind alle Koeffizienten der fortgesetzen Basisvektoren null. Übrig bleibt
+$$x = \sum_{i=1}^t \lambda_i u_i$$
+Das ist genau die Linearkombination der Vektoren des Unterraums, d.h. $x \in U$.
 \end{itemize}
+Damit sind beide Richtungen bewiesen und die Behauptung $U = \bigcap_{i=1}^{n-t} \ker(\alpha_i)$ gilt.
 \end{document}
