@@ -1,0 +1,62 @@
+\documentclass[a4paper,12pt]{article}
+
+% --- Use XeLaTeX font support ---
+
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes} % nice Times-like font, installed by texlive-core
+\setsansfont{TeX Gyre Heros} % optional sans-serif
+\setmonofont{Fira Code}       % optional monospaced font
+% --- Math packages ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% --- Page layout ---
+\usepackage[margin=1in]{geometry}
+
+% --- Better lists ---
+\usepackage{enumitem}
+% --- Hyperlinks for references ---
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+
+% Header: fancy layout like the rovided image
+\usepackage{fancyhdr}
+\setlength{\headheight}{26pt} % increase if fancyhdr warns
+\pagestyle{fancy}
+\fancyhf{} % clear header/footer
+\rhead{\begin{tabular}{r} Mt.: 3052737\end{tabular}}
+\chead{\begin{tabular}{c}Lösungen EA 2\end{tabular}}
+\lhead{\begin{tabular}{l}61521 Einführung in die \\ Numerische Mathematik SS26 \end{tabular}}
+\renewcommand{\headrulewidth}{0.8pt}
+\fancyfoot[C]{- \thepage\ -}
+% Ensure the plain page style (used by \maketitle) uses the same header
+
+% --- Line spacing ---
+\usepackage{setspace} % provides \doublespacing and \onehalfspacing
+
+% --- Optional solutions environment ---
+\newenvironment{solution}{
+  \par\noindent\textbf{Solution:}\quad
+}{\hfill$\blacksquare$\par\vspace{1em}}
+
+% % --- Title info ---
+% \title{Aufgabe \#1}
+% \author{Your Name}
+% \date{\today}
+% 
+\begin{document}
+\raggedright
+% Enable double (2.0) line spacing for the document body
+\doublespacing
+\noindent\textbf{Aufgabe 1} \\
+\noindent\textbf{(a)(i)} Gegeben $\varphi'(x^*) = 0$. Aufgrund der Stetigkeit von $\varphi'$ existiert für jedes $\kappa \in (0, 1)$ eine Umgebung $U_\delta = (x^* - \delta, x^* + \delta)$ mit $\delta > 0$, sodass für alle $x \in U_\delta$ gilt:$$|\varphi'(x)| \le \kappa$$
+Für zwei beliebige Punkte $x, y \in U_\delta$ existiert nach dem Mittelwertsatz der Differentialrechnung ein $\xi$ zwischen $x$ und $y$, für das gilt:$$\varphi(x) - \varphi(y) = \varphi'(\xi)(x - y)$$
+Da  $\xi$ in $U_\delta$ liegt, folgt $|\varphi'(\xi)| \le \kappa$. Daraus:
+$$|\varphi(x) - \varphi(y)| = |\varphi'(\xi)| \cdot |x - y| \le \kappa |x - y|.$$
+Also ist $\varphi$ auf $U_\delta$ kontrahierend mit der Konstanten $\kappa \in (0, 1)$.
+Für beliebiges $x \in U_{\delta}$ gilt
+$$|\varphi(x) - x^*| = |\varphi(x) - \varphi(x^*)| \le \kappa |x - x^*| < \kappa \delta < \delta$$
+ Somit liegt $\varphi(x)$ wieder in $U_\delta$. $\varphi: U_\delta \to U_\delta$ ist demnach eine kontrahierende Selbstabbildung. \\
+ \bigskip
+ 
+ Da $\varphi$ auf der Umgebung $U_\delta$ eine kontrahierende Selbstabbildung ist, liefert der Banachsche Fixpunktsatz, dass die Iterationsfolge $x_{k+1} = \varphi(x_k)$ für jeden Startwert aus dieser Umgebung wohldefiniert ist und gegen den eindeutigen Fixpunkt $x^*$ konvergiert. Es folgt die lokale Konvergenz des Verfahrens. 
+\end{document}
