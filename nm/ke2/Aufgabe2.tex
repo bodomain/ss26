@@ -1,0 +1,125 @@
+\documentclass[a4paper,12pt]{article}
+
+% --- Use XeLaTeX font support ---
+
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes} % nice Times-like font, installed by texlive-core
+\setsansfont{TeX Gyre Heros} % optional sans-serif
+\setmonofont{Fira Code}       % optional monospaced font
+% --- Math packages ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+
+% --- Page layout ---
+\usepackage[margin=1in]{geometry}
+
+% --- Better lists ---
+\usepackage{enumitem}
+% --- Hyperlinks for references ---
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+
+% Header: fancy layout like the rovided image
+\usepackage{fancyhdr}
+\setlength{\headheight}{26pt} % increase if fancyhdr warns
+\pagestyle{fancy}
+\fancyhf{} % clear header/footer
+\rhead{\begin{tabular}{r} Mt.: 3052737\end{tabular}}
+\chead{\begin{tabular}{c}Lösungen EA 2\end{tabular}}
+\lhead{\begin{tabular}{l}61521 Einführung in die \\ Numerische Mathematik SS26 \end{tabular}}
+\renewcommand{\headrulewidth}{0.8pt}
+\fancyfoot[C]{- \thepage\ -}
+% Ensure the plain page style (used by \maketitle) uses the same header
+
+% --- Line spacing ---
+\usepackage{setspace} % provides \doublespacing and \onehalfspacing
+
+% --- Optional solutions environment ---
+\newenvironment{solution}{
+  \par\noindent\textbf{Solution:}\quad
+}{\hfill$\blacksquare$\par\vspace{1em}}
+
+% % --- Title info ---
+% \title{Aufgabe \#1}
+% \author{Your Name}
+% \date{\today}
+% 
+\begin{document}
+\raggedright
+% Enable double (2.0) line spacing for the document body
+\doublespacing
+\noindent\textbf{Aufgabe 2} \\
+\noindent\textbf{(a)} Sei der gesamte Grenzwert $x$. Der Ausdruck lässt sich dan schreiben als 
+$$x= \sqrt{3+2⋅(Rest)}$$
+Der Rest ist genau derselbe unendliche Ausdruck wie das Ganze, also $x= \sqrt{3+2x}$.
+Die zugehörige Iterationsfunktion lautet somit: 
+$$\varphi: \mathbb{R} \rightarrow \mathbb{R}, \ \varphi(x) = \sqrt{3 + 2x}.$$
+Der Fixpunkt lässt sich leicht als $3$ ermitteln.
+
+Nachweis der Fixpunkt-Eigenschaft:
+
+\begin{enumerate}
+    \item Fixpunkt bei $x = 3$:
+    \[
+    \varphi(3) = \sqrt{3 + 2 \cdot 3} = \sqrt{9} = 3 
+    \]
+
+    \item Definitionsbereich:
+    \[
+    \varphi : \left[-\frac{3}{2}, \infty\right) \to [0, \infty)
+    \]
+    (Damit die Wurzel definiert ist)
+
+    \item Konvergenz (für Startwerte $x_0 \geq 0$):
+    Die Ableitung ist:
+    \[
+    \varphi'(x) = \frac{2}{2\sqrt{3 + 2x}} = \frac{1}{\sqrt{3 + 2x}}
+    \]
+    Am Fixpunkt:
+    \[
+    |\varphi'(3)| = \frac{1}{\sqrt{9}} = \frac{1}{3} < 1
+    \]
+    Nach dem Banachschen Fixpunktsatz konvergiert die Iteration
+    \[
+    x_{n+1} = \varphi(x_n)
+    \]
+    für alle Startwerte $x_0 \geq 0$ gegen den Fixpunkt $x^* = 3$.
+\end{enumerate}
+
+Antwort: $\varphi(x) = \sqrt{3 + 2x}$ mit Startwert $x_0 \geq 0$.
+
+\noindent\textbf{(b)} Prüfen der Vorraussetzungen des Satzes 2.2.1:
+
+\begin{itemize}
+\item Abgeschlossenheit: Wir wählen das abgeschlossene Intervall $I = [0, 4].$
+\item Selbstabbildung ($\varphi(I) \subseteq I$):
+Die Funktion $\varphi(x) = \sqrt{3 + 2x}$ ist auf $I$ streng monoton wachsend.
+Wir prüfen die Randpunkte:\\
+$$\varphi(0) = \sqrt{3 + 0} = \sqrt{3} \approx 1{,}732 \ge 0$$ 
+$$\varphi(4) = \sqrt{3 + 8} = \sqrt{11} \approx 3{,}317 \le 4$$\\
+Daraus folgt, dass $\varphi([0, 4]) = [\sqrt{3}, \sqrt{11}] \subset [0, 4]$ ist. Die Funktion bildet das Intervall also in sich selbst ab. 
+\item Kontraktionseigenschaft ($|\varphi'(x)| \le L < 1$):
+$$\varphi'(x) =  \frac{1}{\sqrt{3 + 2x}}$$
+Da der Nenner für größer werdende $x$ wächst, ist $\varphi'(x)$ streng monoton fallend auf $I$. Ihr Maximum nimmt die Ableitung also am linken Rand $x = 0$ an:$$\max_{x \in [0, 4]} |\varphi'(x)| = \varphi'(0) = \frac{1}{\sqrt{3}} \approx 0{,}577<1$$
+Es handelt sich also um eine Kontraktion.
+
+\end{itemize}
+Da alle Voraussetzungen erfüllt sind, existiert auf dem Intervall $I = [0, 4]$ nach dem Banachschen Fixpunktsatz genau ein Fixpunkt und die Iteration konvergiert für jeden Startwert $x_0 \in I$ gegen diesen.\\
+
+
+\bigskip
+\noindent\textbf{(c)} Berechnung der ersten 5 Iterierten: \\
+\begin{align*}
+x_0 &= \sqrt{3} \approx 1{,}73205\\
+x_1 &= \sqrt{3 + 2 \cdot 1{,}73205} = \sqrt{6{,}46410} \approx 2{,}54246\\
+x_2 &= \sqrt{3 + 2 \cdot 2{,}54246} = \sqrt{8{,}08492} \approx 2{,}84340\\
+x_3 &= \sqrt{3 + 2 \cdot 2{,}84340} = \sqrt{8{,}68680} \approx 2{,}94734\\
+x_4 &= \sqrt{3 + 2 \cdot 2{,}94734} = \sqrt{8{,}89468} \approx 2{,}98239\\
+x_5 &= \sqrt{3 + 2 \cdot 2{,}98239} = \sqrt{8{,}96478} \approx 2{,}99413 
+\end{align*}
+Die Formel für die a-posteriori-Fehlerabschätzung lautet (Satz 2.2.2):
+$$|x_n - x^*| \le \frac{L}{1-L} |x_n - x_{n-1}|$$
+Aus (b):
+$$\frac{L}{1-L} = \frac{\frac{1}{\sqrt{3}}}{1 - \frac{1}{\sqrt{3}}} = \frac{1}{\sqrt{3}-1} \approx 1{,}36603$$
+Differenz der letzten beiden Iterierten:$$|x_5 - x_4| \approx |2{,}99413 - 2{,}98239| = 0{,}01174$$
+Eingesetzt in die Abschätzungsformel ergibt sich die Fehlerschranke:$$|x_5 - x^*| \le 1{,}36603 \cdot 0{,}01174 \approx 0{,}01604$$Der Fehler für $x_5$ liegt laut Abschätzung also garantiert unter $0{,}01604$
+\end{document}

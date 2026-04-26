@@ -58,19 +58,58 @@ Die Funktion hat an den Punkten $sin(x)=0$ Unstetigkeitspunkte, also wenn $x=k\p
 Annäherung von rechts mit der Folge $x_n = 1/n$, dann ist $\sin(x_n)>0$ und damit $f(\sin(x_n)) = 1$. Der rechseitige Grenzwert ist 1. \\
 Bei Annäherung von links mit $x_n = - 1/n$ ist der Grenzwert $-1$ wegen $\sin(x_n)<0$. \\
 Da der linkseitige und rechseitige Grenzwert nicht übereinstimmen ist die Funktion im Punkt $x=0$ nicht stetig. \\
-Für $x \neq k\pi$ handelt es sich um eine Verknüpfung von stetigen Funktionen. Die Funktion $f \circ g$ ist daher in diesen Punkten stetig.
+Auf den Teilstücken (offenen Intervallen) zwischen den Punkten  $x \neq k\pi$ handelt es sich quasi um eine Verknüpfung von stetigen Funktionen. Die Funktion $f \circ g$ ist daher in diesen Abschnitten stetig.
 
 \bigskip
 \noindent\textbf{(b)} \\
 \begin{itemize}
     \item Klar ist $f_n(0) =0$ und $f_n(1) = n$.
-Da $f_n(x)$ als Polynomfunktion stetig ist folgt aus dem Zwischenwertsatz, dass es (mindestens) ein $x_n$ mit $f(x_n)=1$ gibt. Da $f_n$ nur aus positiven Potenzen besteht ist die Ableitung positiv für $x>0$, die Funktion daher monoton steigend und das $x_n$ eindeutig. 
+Da $f_n(x)$ als Polynomfunktion stetig ist folgt aus dem Zwischenwertsatz, dass es (mindestens) ein $x_n$ mit $f_n(x_n)=1$ gibt. Da $f_n$ nur aus positiven Potenzen besteht ist die Ableitung positiv für $x>0$, die Funktion ist daher monoton steigend und das $x_n$ eindeutig. 
 \item Die nächste Funktion in der Reihe ist $f_{n+1}(x)=x+x²+ \cdots + x^{n+1}=f_n(x)+x^{n+1} $. Wegen $f_n(x_n)=1$ folgt $f_{n+1}(x_n) = 1 + x_n^{n+1}$. Wir wissen, dass $x_n > 0$ ist. Daher ist $f_{n+1}(x_n) > 1$. Aufgrund der Monotonie der Funktion muss $x_{n+1} < x_n$ gelten. Damit ist gezeigt, das $(x_n)$ streng monoton ist.
-\item Mit Hilfe der geometrischen Summe lässt sich die Funktion umformulieren zu 
+\item Mit Hilfe der geometrischen Summe lässt sich die Funktion umformulieren als 
 $$f_n(x_n) = x_n \frac{1-x_n^n}{1-x_n}= 1$$
 Multiplizieren beider Seiten mit $1-x_n$
 $$x_n(1-x_n^n)=1-x_n$$
+$$x_n - x_n^{n+1} = 1 - x_n$$
+$$2x_n - 1 = x_n^{n+1}$$
+Da $(x_n)$ monoton fällt, ist jedes $x_n \le x_2$.
+ \\
+ Und für $x_2$ gilt $x_2^2 + x_2 = 1$ daher ist $x_2 <1$ und $\lim_{n\to\infty} x_2^{n+1} = 0$. Da alle $x_n$ zwischen $0$ und $x_2$ liegen müssen, folgt damit aus dem Sandwich-Theorem $\lim_{n \to \infty} x_n^{n+1} = 0$. \\
+Es folgt:
+$$2x^* - 1 = 0$$$$2x^* = 1$$$$x^* = \frac{1}{2}$$Der Grenzwert der Folge ist also $1/2$.
 
 \end{itemize}
 
+\noindent\textbf{(c)} \\
+\textbf{Nicht gleichmäßig stetig auf }$\mathbf{]0,a[}$\\
+
+Zwei Folgen, die für $n \to \infty$ gegen $0$ konvergieren und genau die Hoch- und Tiefpunkte der Sinus-Schwingung treffen:
+$$x_n = \frac{1}{\frac{\pi}{2} + 2\pi n} \quad , \quad y_n = \frac{1}{\frac{3\pi}{2} + 2\pi n}$$
+Dann gilt:
+$$x_n \rightarrow 0, \quad y_n \rightarrow 0$$
+Insbesondere liegen $x_n$ und $y_n$ in $]0,a[$ für grosse n. Ausserdem 
+$$|x_n - y_n| \rightarrow 0$$
+Für die Sinusterme gilt aber: $$\sin\left(\frac{1}{x_n}\right) = \sin\left(\frac{\pi}{2} + 2\pi n\right) = 1$$ und $$\sin\left(\frac{1}{y_n}\right) = \sin\left(\frac{3\pi}{2} + 2\pi n\right) = -1.$$
+Damit ergeben sich die Funktionswerte:$$f(x_n) = \frac{x_n+2}{x_n+1} \cdot 1 \quad \text{und} \quad f(y_n) = \frac{y_n+2}{y_n+1} \cdot (-1)$$
+Abstand der Funktionswerte:
+$$ |f(x_n) - f(y_n)| \rightarrow |2 \cdot 1 - 2 \cdot (-1)| = |2 - (-2)| = 4$$
+Obwohl also
+$$|x_n - y_n| \rightarrow 0,$$
+geht 
+$$|f(x_n) - f(y_n)|$$ nicht gegen null. Damit ist $f(x)$ auf $]0,a[$  nicht gleichmäßig stetig. \\
+\bigskip
+\textbf{Gleichmäßig stetig auf }$\mathbf{[a,\infty[}$\\
+Die Funktion ist dort diff'bar:
+$$f'(x) = \left( \frac{1\cdot(x+1) - (x+2)\cdot1}{(x+1)^2} \right) \sin\left(\frac{1}{x}\right) + \left( \frac{x+2}{x+1} \right) \cos\left(\frac{1}{x}\right) \cdot \left(-\frac{1}{x^2}\right)$$
+$$f'(x) = \frac{-1}{(x+1)^2} \sin\left(\frac{1}{x}\right) - \frac{x+2}{x^2(x+1)} \cos\left(\frac{1}{x}\right)$$
+Abschätzen der Ableitung: 
+$$|f'(x)| \le \left| \frac{-1}{(x+1)^2} \right| \cdot \left|\sin\left(\frac{1}{x}\right)\right| + \left| \frac{x+2}{x^2(x+1)} \right| \cdot \left|\cos\left(\frac{1}{x}\right)\right|$$$$|f'(x)| \le \frac{1}{(x+1)^2} + \frac{x+2}{x^2(x+1)}$$
+Abschätzen nach der Brüche nach oben indem der Nenner möglichst klein wird $(x=a)$:
+$$L = \frac{1}{(a+1)^2} + \frac{1}{a^2} + \frac{1}{a^2(a+1)}$$
+
+($\frac{x+2}{x^2(x+1)} = \frac{(x+1) + 1}{x^2(x+1)} = \frac{1}{x^2} + \frac{1}{x^2(x+1)}$)\\
+Also gilt:
+$$|f'(x)| \le L$$
+Da die Ableitung auf dem gesamten Intervall $[a, \infty[$ durch $L$ beschränkt ist, ist $f$ dort dehnungsbeschränkt (Lipschitz-stetig). Nach dem Mittelwertsatz der Differenzialrechnung gilt für alle $x, y \in [a, \infty[$:$$|f(x) - f(y)| \le L |x - y|$$
+Jede Lipschitz-stetige Funktion ist aber zwingend gleichmäßig stetig
 \end{document}

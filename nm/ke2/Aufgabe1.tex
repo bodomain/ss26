@@ -48,7 +48,7 @@
 % Enable double (2.0) line spacing for the document body
 \doublespacing
 \noindent\textbf{Aufgabe 1} \\
-\noindent\textbf{(a)(i)} Gegeben $\varphi'(x^*) = 0$. Aufgrund der Stetigkeit von $\varphi'$ existiert für jedes $\kappa \in (0, 1)$ eine Umgebung $U_\delta = (x^* - \delta, x^* + \delta)$ mit $\delta > 0$, sodass für alle $x \in U_\delta$ gilt:$$|\varphi'(x)| \le \kappa$$
+\noindent\textbf{(a)\\(i)} Gegeben $\varphi'(x^*) = 0$. Aufgrund der Stetigkeit von $\varphi'$ existiert für jedes $\kappa \in (0, 1)$ eine Umgebung $U_\delta = (x^* - \delta, x^* + \delta)$ mit $\delta > 0$, sodass für alle $x \in U_\delta$ gilt:$$|\varphi'(x)| \le \kappa$$
 Für zwei beliebige Punkte $x, y \in U_\delta$ existiert nach dem Mittelwertsatz der Differentialrechnung ein $\xi$ zwischen $x$ und $y$, für das gilt:$$\varphi(x) - \varphi(y) = \varphi'(\xi)(x - y)$$
 Da  $\xi$ in $U_\delta$ liegt, folgt $|\varphi'(\xi)| \le \kappa$. Daraus:
 $$|\varphi(x) - \varphi(y)| = |\varphi'(\xi)| \cdot |x - y| \le \kappa |x - y|.$$
@@ -58,5 +58,53 @@ $$|\varphi(x) - x^*| = |\varphi(x) - \varphi(x^*)| \le \kappa |x - x^*| < \kappa
  Somit liegt $\varphi(x)$ wieder in $U_\delta$. $\varphi: U_\delta \to U_\delta$ ist demnach eine kontrahierende Selbstabbildung. \\
  \bigskip
  
- Da $\varphi$ auf der Umgebung $U_\delta$ eine kontrahierende Selbstabbildung ist, liefert der Banachsche Fixpunktsatz, dass die Iterationsfolge $x_{k+1} = \varphi(x_k)$ für jeden Startwert aus dieser Umgebung wohldefiniert ist und gegen den eindeutigen Fixpunkt $x^*$ konvergiert. Es folgt die lokale Konvergenz des Verfahrens. 
+ Da $\varphi$ auf der Umgebung $U_\delta$ eine kontrahierende Selbstabbildung ist, liefert der Banachsche Fixpunktsatz, dass die Iterationsfolge $x_{k+1} = \varphi(x_k)$ für jeden Startwert aus dieser Umgebung wohldefiniert ist und gegen den eindeutigen Fixpunkt $x^*$ konvergiert. Es folgt die lokale Konvergenz des Verfahrens. \\
+ \bigskip
+ \noindent\textbf{(ii)} 
+\begin{itemize}
+  \item Da $\varphi$ $(p+1)$-mal stetig differenzierbar ist, existiert nach dem Satz von Taylor ein $\xi$ zwischen $x$ und $x^*$, sodass:$$\varphi(x) = \varphi(x^*) + \sum_{j=1}^{p} \frac{\varphi^{(j)}(x^*)}{j!} (x - x^*)^j + \frac{\varphi^{(p+1)}(\xi)}{(p+1)!} (x - x^*)^{p+1}$$
+  Bildung des Betrags:
+  $$|\varphi(x) - \varphi(x^*)| = \frac{|\varphi^{(p+1)}(\xi)|}{(p+1)!} |x - x^*|^{p+1}$$
+  Einsetzen der Ungleichung aus der Aufgabenstellung ($|\varphi^{(p+1)}(x)| \le M(p+1)!$):
+  $$\boxed{|\varphi(x) - \varphi(x^*)| \le \frac{M(p+1)!}{(p+1)!} |x - x^*|^{p+1} = M |x - x^*|^{p+1}}$$
+
+  \item Einsetzen von   $x_{k+1} = \varphi(x_k)$ in die Ungleichung:
+$$|x_{k+1} - x^*| \le M |x_k - x^*|^{p+1}$$
+$$\frac{|x_{k+1} - x^*|}{|x_k - x^*|^{p+1}} \le M.$$
+Also
+$$\limsup_{k \to \infty} \frac{|x_{k+1} - x^*|}{|x_k - x^*|^{p+1}} \in \mathbb{R}.$$
+Das beweist, dass die Q-Ordnung mindestens $p+1$ ist.
+\end{itemize}
+
+\bigskip
+\noindent\textbf{(b)}
+Das Newton-Verfahren hat die Iterationsfunktion:$$\varphi(x) = x - \frac{f(x)}{f'(x)}$$
+Die erste Ableitung ist:
+$$\varphi'(x) = 1 - \frac{f'(x)f'(x) - f(x)f''(x)}{[f'(x)]^2} = \frac{f(x)f''(x)}{[f'(x)]^2}$$
+Einsetzen von $f(x^*) = 0$:
+$$\varphi'(x^*) = \frac{0 \cdot f''(x^*)}{[f'(x^*)]^2} = 0$$
+Da $f$ dreimal stetig differenzierbar ist, ist $\varphi$ in einer Umgebung von $x^*$ zweimal stetig differenzierbar. \\ 
+Die Voraussetzungen aus Aufgabenteil (a) für $p=1$ sind erfüllt. Nach (a)(ii) ist die Q-Ordnung des Verfahrens somit mindestens $p+1 = 1+1 = 2$. Das Verfahren konvergiert lokal Q-quadratisch. \\
+
+\bigskip
+\noindent\textbf{(c)}
+Der erste Schritt ($y_n$) ist das Standard-Newton-Verfahren. Aus (b) wissen wir, dass dessen Fehler quadratisch abfällt, $\tilde{e}_n = \mathcal{O}(e_n^2)$.
+Für den Fehler im zweiten Schritt betrachtet man $e_{n+1} = x_{n+1} - x^*$:$$e_{n+1} = y_n - x^* - \frac{f(y_n)}{f'(x_n)} = \tilde{e}_n - \frac{f(y_n)}{f'(x_n)} = \frac{\tilde{e}_n f'(x_n) - f(y_n)}{f'(x_n)}$$
+Taylor-Reihen um $x^*$: \\
+Für $f'(x_n)$:\\
+$$f'(x_n) = f'(x^*) + f''(x^*)e_n + \mathcal{O}(e_n^2)$$
+Für $f(y_n)$:\\
+Wegen $f(x^*) = 0$ gilt:
+$$f(y_n) = f'(x^*)\tilde{e}_n + \mathcal{O}(\tilde{e}_n^2)$$
+Da $\tilde{e}_n = \mathcal{O}(e_n^2)$ ist, wird $\mathcal{O}(\tilde{e}_n^2) = \mathcal{O}(e_n^4)$. Somit:
+$$f(y_n) = f'(x^*)\tilde{e}_n + \mathcal{O}(e_n^4)$$
+Einsetzen in den Zähler:
+\begin{align*}
+\text{Zähler} &= \tilde{e}_n \left[ f'(x^*) + f''(x^*)e_n + \mathcal{O}(e_n^2) \right] - \left[ f'(x^*)\tilde{e}_n + \mathcal{O}(e_n^4) \right] \\
+&= \tilde{e}_n f''(x^*)e_n + \tilde{e}_n \mathcal{O}(e_n^2) + \mathcal{O}(e_n^4) \\
+ &= \mathcal{O}(e_n^2)\,e_n + \mathcal{O}(e_n^2)\mathcal{O}(e_n^2) + \mathcal{O}(e_n^4) \\
+ &= \mathcal{O}(e_n^3)
+\end{align*}
+Der Nenner $f'(x_n)$ nähert sich $f'(x^*) \neq 0$ an, also einer Konstanten. Daher ergibt sich für den Gesamtfehler:$$e_{n+1} = \frac{\mathcal{O}(e_n^3)}{f'(x^*) + \mathcal{O}(e_n)} = \mathcal{O}(e_n^3)$$
+Damit ist gezeigt, dass das zweistufige Newton-Verfahren lokal mindestens die Q-Ordnung 3 besitzt.
 \end{document}
